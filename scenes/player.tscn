@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnbq8lbrd0i6h"]
+
+[ext_resource type="Script" path="res://addons/vision_cone_2d/examples/player_movement.gd" id="1_om4ty"]
+[ext_resource type="PackedScene" uid="uid://b1a6y54fpfk8k" path="res://scenes/gamer.tscn" id="2_5jjri"]
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(600, 404)
+script = ExtResource("1_om4ty")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_5jjri")]

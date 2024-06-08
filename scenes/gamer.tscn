@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1a6y54fpfk8k"]
+
+[ext_resource type="Script" path="res://scenes/CharacterBody2D.gd" id="1_jso40"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(2, 4)
+script = ExtResource("1_jso40")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(4.29153e-06, 0)
+scale = Vector2(3, 3)
+polygon = PackedVector2Array(-3.00001, 3, -3.00001, -4, 4, -4, 4, 3)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-0.136608, 0.136608)
+scale = Vector2(1.2269, 1.9267)
+polygon = PackedVector2Array(9.6934, -6.17265, -7.27005, -6.17265, -7.27005, 4.62949, 9.6934, 4.62949)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.8, 0.8)
