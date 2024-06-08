@@ -26,14 +26,14 @@ var player_position
 var target_position
 
 func _on_vision_cone_area_body_entered(body: Node2D) -> void:
-	# print("%s is seeing %s" % [self, body])
+	print("%s is seeing %s" % [self, body])
 	vision_renderer.color = alert_color
 	is_alerted = true
 	is_searching = true
 
 
 func _on_vision_cone_area_body_exited(body: Node2D) -> void:
-	# print("%s stopped seeing %s" % [self, body])
+	print("%s stopped seeing %s" % [self, body])
 	vision_renderer.color = original_color
 	is_alerted = false
 
@@ -50,10 +50,13 @@ func _physics_process(delta: float) -> void:
 		target_position = (player_position - position).normalized()
 	if is_searching:
 		if position.distance_to(player_position) > 3:
+			print("cherche")
 			velocity = target_position * speed
 			move_and_slide()
 			look_at(player_position)
+			is_rotating = false
 		else:
+			print("Idle")
 			is_alerted = false
 			is_searching = false
 			is_rotating = true
