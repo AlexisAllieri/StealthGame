@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[layer_names]
+
+2d_physics/layer_9="Enemy"
+2d_physics/layer_10="player"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

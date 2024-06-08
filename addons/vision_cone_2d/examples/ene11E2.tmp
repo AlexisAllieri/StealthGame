@@ -7,7 +7,6 @@
 script = ExtResource("1_pxito")
 vision_renderer = NodePath("VisionCone2D/VisionConeRenderer")
 alert_color = Color(0.6, 0.270588, 0.247059, 0.368627)
-metadata/_edit_horizontal_guides_ = [-270.0]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-4, -1)

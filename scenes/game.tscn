@@ -1,22 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://4esrphl4wunn"]
+[gd_scene load_steps=5 format=3 uid="uid://4esrphl4wunn"]
 
 [ext_resource type="PackedScene" uid="uid://hm3o2foxwd2m" path="res://addons/vision_cone_2d/examples/wall.tscn" id="3_op0gu"]
 [ext_resource type="PackedScene" uid="uid://bulute7i5ksyy" path="res://addons/vision_cone_2d/examples/enemy.tscn" id="3_rv6ab"]
 [ext_resource type="PackedScene" uid="uid://b1a6y54fpfk8k" path="res://scenes/gamer.tscn" id="3_vfvad"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_7rgpr"]
+vertices = PackedVector2Array(1933, 592, -2123, 592, -1191, 306, 1933, -392, -1369, 306, -2107, -391, -1369, -112, -1191, -391, -1191, -112, -1191, -392)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(4, 1, 5, 6), PackedInt32Array(6, 5, 7, 8), PackedInt32Array(3, 2, 8), PackedInt32Array(3, 8, 7), PackedInt32Array(3, 7, 9)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1200.63, -402.499, 1943.13, -402.499, 1943.13, 601.673, -1200.63, 601.673), PackedVector2Array(-1358.61, 295.65, -1200.63, 295.65, -1200.63, 601.673, -2132.7, 601.673, -2116.9, -402.499, -1200.63, -401.461, -1200.63, -101.662, -1358.61, -101.662)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="Game" type="Node2D"]
 
 [node name="Enemy2" parent="." instance=ExtResource("3_rv6ab")]
 position = Vector2(611, 295)
 rotation = -1.5708
+collision_layer = 256
+collision_mask = 513
 is_rotating = true
 rotation_speed = 1.0
 
-[node name="VisionCone2D" parent="Enemy2" index="2"]
+[node name="NavigationAgent2D" parent="Enemy2" index="2"]
+radius = 60.0
+neighbor_distance = 200.0
+time_horizon_obstacles = 10.0
+
+[node name="VisionCone2D" parent="Enemy2" index="3"]
 angle_deg = 45
 ray_count = 50
-max_distance = 700
 recalculate_if_static = true
+
+[node name="VisionConeArea" parent="Enemy2/VisionCone2D" index="1"]
+collision_mask = 513
 
 [node name="Explanation" type="Label" parent="Enemy2"]
 visible = false
@@ -44,8 +59,8 @@ scale = Vector2(1, 22.88)
 collision_layer = 3
 
 [node name="Wall5" parent="." instance=ExtResource("3_op0gu")]
-position = Vector2(-689, 55)
-scale = Vector2(1, 5.8)
+position = Vector2(-672, 56)
+scale = Vector2(1.96227, 9.32963)
 collision_layer = 3
 
 [node name="Wall4" parent="." instance=ExtResource("3_op0gu")]
@@ -54,6 +69,13 @@ scale = Vector2(1, 22.88)
 collision_layer = 3
 
 [node name="Player" parent="." instance=ExtResource("3_vfvad")]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-24, -38)
+scale = Vector2(0.5064, 0.963978)
+navigation_polygon = SubResource("NavigationPolygon_7rgpr")
+
+[connection signal="velocity_computed" from="Enemy2/NavigationAgent2D" to="Enemy2" method="_on_navigation_agent_2d_velocity_computed"]
 
 [editable path="Enemy2"]
 [editable path="Enemy2/VisionCone2D"]
